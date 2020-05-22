@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Footer component correctly 1`] = `
+<div
+  className="sc-AxjAm fLHnvz"
+>
+  For Callstack team! App made for recruitment purposes by 
+  <span
+    className="sc-AxirZ eBjaA-D"
+  >
+    Karol Guzikowski
+  </span>
+  .
+</div>
+`;

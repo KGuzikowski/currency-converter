@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders AcceptExtraPoints component correctly 1`] = `
+<div
+  className="sc-AxjAm iORRVj"
+>
+  <p
+    className="sc-AxirZ bKXrev"
+  >
+    It's not cookies. Accept to add extra points!
+  </p>
+  <a
+    className="sc-AxiKw iEFYEV"
+    onClick={[Function]}
+    reversed={true}
+  >
+    Accept
+  </a>
+</div>
+`;
