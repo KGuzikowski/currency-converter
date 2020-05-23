@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import reposReducer from './repos/repo.reducer'
+import currenciesReducer from './currencies/currencies.reducer'
 import extraPointsReducer from './extraPoints/extraPoints.reducer'
 
 const reducers = {
-    repos: reposReducer,
+    currencies: currenciesReducer,
     extraPoints: extraPointsReducer
 }
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['repos', 'user', 'extraPoints']
+    whitelist: ['currencies', 'extraPoints']
 }
 
 const rootReducer = combineReducers(reducers)

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       width: 200,
-      height: 230,
+      height: 300,
       overflow: 'auto',
     },
     button: {
@@ -28,19 +28,21 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface TransferListProps {
-  currencies: string[]
+  startRight: string[],
+  startLeft: string[],
+  setToCheck: (toCheck: string[]) => void
 }
 
-const TransferList = ({ currencies }: TransferListProps) => {
+const TransferList = ({ startRight, startLeft, setToCheck }: TransferListProps) => {
   const classes = useStyles()
   const [checked, setChecked] = useState<string[]>([])
-  const [left, setLeft] = useState<string[]>(currencies)
-  const [right, setRight] = useState<string[]>([])
+  const [left, setLeft] = useState<string[]>(startLeft)
+  const [right, setRight] = useState<string[]>(startRight)
 
   const leftChecked = intersection(checked, left)
   const rightChecked = intersection(checked, right)
 
-  const handleToggle = (value: string) => () => {
+  const handleToggle = (value: string): void => {
     const currentIndex = checked.indexOf(value)
     const newChecked = [...checked]
 
@@ -53,26 +55,30 @@ const TransferList = ({ currencies }: TransferListProps) => {
     setChecked(newChecked)
   }
 
-  const handleAllRight = () => {
+  const handleAllRight = (): void => {
     setRight(right.concat(left))
     setLeft([])
+    setToCheck(right.concat(left))
   }
 
-  const handleCheckedRight = () => {
+  const handleCheckedRight = (): void => {
     setRight(right.concat(leftChecked))
     setLeft(not(left, leftChecked))
     setChecked(not(checked, leftChecked))
+    setToCheck(right.concat(leftChecked))
   }
 
-  const handleCheckedLeft = () => {
+  const handleCheckedLeft = (): void => {
     setLeft(left.concat(rightChecked))
     setRight(not(right, rightChecked))
     setChecked(not(checked, rightChecked))
+    setToCheck(not(right, rightChecked))
   }
 
-  const handleAllLeft = () => {
+  const handleAllLeft = (): void => {
     setLeft(left.concat(right))
     setRight([])
+    setToCheck([])
   }
 
   const customList = (items: string[]) => (
@@ -82,7 +88,7 @@ const TransferList = ({ currencies }: TransferListProps) => {
           const labelId = `transfer-list-item-${value}-label`
 
           return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+            <ListItem key={value} role="listitem" button onClick={() => handleToggle(value)}>
               <ListItemIcon>
                 <Checkbox
                   checked={checked.indexOf(value) !== -1}

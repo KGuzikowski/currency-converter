@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center'
         },
         btn: {
-            marginLeft: theme.spacing(2)
+            marginLeft: theme.spacing(2),
+            padding: theme.spacing(1, 2)
         }
     })
 )
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const AcceptExtraPoints = () => {
     const dispatch = useDispatch()
     const classes = useStyles()
-    const [visible, changeVisible] = useState(true)
+    const [visible, changeVisible] = useState<boolean>(true)
 
     const handleClick = () => {
         changeVisible(false)
