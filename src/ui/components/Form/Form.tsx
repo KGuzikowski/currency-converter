@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'stretch',
-            margin: theme.spacing(3, 0)
+            margin: theme.spacing(3, 0),
         },
         inputs: {
             display: 'flex'
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '20%'
         },
         btn: {
-            marginTop: theme.spacing(2),
+            marginTop: theme.spacing(3),
             padding: theme.spacing(1.5)
         },
         explanation: {
@@ -59,7 +59,6 @@ const Form = () => {
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.currentTarget.value === '' ? null : parseInt(e.currentTarget.value)
-        console.log(val)
         setAmount(val)
     }
 

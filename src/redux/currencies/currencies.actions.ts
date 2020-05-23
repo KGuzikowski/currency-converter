@@ -32,9 +32,17 @@ export const fetchCurrenciesStartAsync = (usedCurrency: string, currenciesToChec
             })
             const response = await fetch(url.slice(0, -1))
             const data = await response.json()
-            console.log(data)
-            // const currencies = [];
-            dispatch(fetchCurrenciesSuccess([]))
+
+            let currencies: currencyDataType[] = []
+            for(const curr in data.rates) {
+                if(curr !== usedCurrency)
+                    currencies.push({
+                        name: curr,
+                        value: data.rates[curr]
+                    })
+            }
+            
+            dispatch(fetchCurrenciesSuccess(currencies))
         } catch(e) {
             dispatch(fetchCurrenciesFailure('Sorry, cannot fetch data! Please try again.'))
         }

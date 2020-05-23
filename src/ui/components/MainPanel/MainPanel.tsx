@@ -5,12 +5,14 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Form from '../Form/Form'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import CurrenciesPanel from '../CurrenciesPanel/CurrenciesPanel'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      // alignItems: 'stretch'
     },
     spinner: {
       width: '48%',
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MainPanel = () => {
   const classes = useStyles()
   const currencyData = useSelector((state: RootState) => state.currencies)
-  const shouldDisplayRightPanel = currencyData.currencies && currencyData.currencies.length
+  const shouldDisplayRightPanel = !!(currencyData.currencies && currencyData.currencies.length)
 
   return (
     <>
@@ -46,7 +48,7 @@ const MainPanel = () => {
             ? <div className={classes.spinner}>
                 <CircularProgress color="secondary" />
               </div>
-            : null
+            : <CurrenciesPanel shouldDisplayRightPanel={shouldDisplayRightPanel} />
         }
       </div>
     </>
