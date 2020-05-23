@@ -1,5 +1,5 @@
 import { reposActionTypes, reposStateType, sortType } from './repo.types'
-import { sortTable } from '../../utils/sortTable'
+// import { sortTable } from '../../utils/sortTable'
 
 export const INITIAL_STATE: reposStateType = {
     repos: null,
@@ -33,17 +33,6 @@ const reposReducer = (state = INITIAL_STATE, action: any): reposStateType => {
                 isFetching: false,
                 errorMessage: action.payload,
                 page: 1,
-            }
-
-        case reposActionTypes.SORT_REPOS_ASC:
-            return {
-                ...state,
-                repos: sortTable(state.repos!, sortType.Asc,  action.payload)
-            }
-        case reposActionTypes.SORT_REPOS_DESC:
-            return {
-                ...state,
-                repos: sortTable(state.repos!, sortType.Desc,  action.payload)
             }
         case reposActionTypes.SET_PAGINATION:
             return {
