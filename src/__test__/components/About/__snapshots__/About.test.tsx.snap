@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders About component correctly 1`] = `
+<h6
+  className="MuiTypography-root makeStyles-title-1 MuiTypography-h6"
+>
+  You can use this tool to search for many different currencies and their historical data.
+</h6>
+`;

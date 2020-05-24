@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Footer component correctly 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <p
+    className="MuiTypography-root MuiTypography-body1"
+  >
+    Let's convert some currencies! App made for recruitment purposes by 
+    <span>
+       
+    </span>
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-name-2 MuiTypography-colorPrimary"
+      href="https://github.com/KGuzikowski"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      rel="noopener"
+      target="_blank"
+    >
+      Karol Guzikowski
+    </a>
+    .
+  </p>
+</div>
+`;
