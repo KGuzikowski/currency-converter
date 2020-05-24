@@ -10,6 +10,8 @@ function compare(a: point, b: point): compareType {
     else return 0;
 }
 
+// this function prepares data to be in a format I want
+// starting and final formats are described by typescript interfaces
 export default function prepareChartData(rates: rates): rate[] {
     const final = []
     for(const curr in rates) {

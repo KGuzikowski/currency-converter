@@ -80,7 +80,7 @@ const GraphsSection = ({ usedCurrency, currenciesToCheck, history, historyError,
             {
                 error
                 ? <div className={classes.error}><ErrorMessage>{ [error] }</ErrorMessage></div>
-                : !history
+                : !history // if there is no data for charts then display nothing else display charts
                     ? null
                     : <Graphs rates={history!.rates} allGraphsTogether={allGraphsTogether} />
             }

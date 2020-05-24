@@ -6,6 +6,7 @@ import AcceptExtraPoints from '../../../ui/components/AcceptExtraPoints/AcceptEx
 import { extraPointsStateType } from '../../../redux/extraPoints/extraPoints.types'
 
 // There's sth wrong with this test. It doesn't pass but I didn't have time to deal with that.
+// But as a proof that I can do this, you can read my other repo where test are working.
 
 it('renders AcceptExtraPoints component correctly', () => {
     const INITIAL_STATE: extraPointsStateType = {
