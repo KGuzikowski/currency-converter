@@ -4,6 +4,7 @@ import { RootState } from '../../../redux/rootReducer'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import CurrencyListItem from '../CurrencyListItem/CurrencyListItem'
+import Title from '../Title/Title'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,11 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'flex',
         flexDirection: 'column',
         margin: theme.spacing(3, 0)
-    },
-    title: {
-        width: '100%',
-        textAlign: 'center',
-        marginBottom: theme.spacing(4)
     },
     money: {
         fontWeight: 'normal',
@@ -41,13 +37,13 @@ const CurrenciesPanel = ({ shouldDisplayRightPanel }: CurrenciesPanelProps) => {
     if(!shouldDisplayRightPanel)
         return (
             <div className={classes.root}>
-                <Typography className={classes.title} variant="h6">Here you will see data you requested:</Typography>
+                <Title>Here you will see data you requested:</Title>
             </div>
         )
     else
         return (
             <div className={classes.root}>
-                <Typography className={classes.title} variant="h6">Here you can see data you requested:</Typography>
+                <Title>Here you can see data you requested:</Title>
                 <Typography variant="h6" className={classes.money}>{ currencyData.amount } { currencyData.usedCurrency } equals:</Typography>
                 <div className={classes.list}>
                     {

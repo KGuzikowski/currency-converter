@@ -6,16 +6,25 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Form from '../Form/Form'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import CurrenciesPanel from '../CurrenciesPanel/CurrenciesPanel'
+import GraphsSection from '../GraphsSection/GraphsSection'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+
+    },
+    data: {
       display: 'flex',
       justifyContent: 'space-between',
-      // alignItems: 'stretch'
     },
     spinner: {
       width: '48%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    spinner2: {
+      width: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
@@ -25,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'center',
       margin: theme.spacing(2, 0),
-    }
+    },
   })
 )
 
@@ -42,13 +51,34 @@ const MainPanel = () => {
           : null
       }
       <div className={classes.root}>
-        <Form />
+        <div className={classes.data}>
+          <Form />
+          {
+            currencyData.isFetching
+              ? <div className={classes.spinner}>
+                  <CircularProgress color="secondary" />
+                </div>
+              : <CurrenciesPanel shouldDisplayRightPanel={shouldDisplayRightPanel} />
+          }
+        </div>
         {
-          currencyData.isFetching
-            ? <div className={classes.spinner}>
-                <CircularProgress color="secondary" />
+          currencyData.isFetching || currencyData.isFetchingHistory
+            ? <div className={classes.spinner2}>
+                < CircularProgress color="secondary" />
               </div>
-            : <CurrenciesPanel shouldDisplayRightPanel={shouldDisplayRightPanel} />
+            : currencyData.historyError
+              ? <div className={classes.error}>
+                  <ErrorMessage>
+                    {[currencyData.historyError]}
+                  </ErrorMessage>
+                </div>
+              : shouldDisplayRightPanel
+                  ? <GraphsSection
+                      usedCurrency={currencyData.usedCurrency}
+                      currenciesToCheck={currencyData.currenciesToCheck}
+                      history={currencyData.history}
+                    />
+                  : null
         }
       </div>
     </>

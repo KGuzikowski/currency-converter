@@ -10,6 +10,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import { RootState } from '../../../redux/rootReducer'
 import { fetchCurrenciesStartAsync } from '../../../redux/currencies/currencies.actions'
 import { restOf } from '../../../utils/Form.utils'
+import Title from '../Title/Title'
 
 const currencies = [ 'EUR', 'CAD', 'HKD', 'ISK', 'PHP', 'DKK', 'HUF', 'CZK', 'AUD', 'RON', 'SEK', 'IDR', 'INR', 'BRL', 'RUB', 'HRK', 'JPY', 'THB', 'CHF', 'SGD', 'PLN', 'BGN', 'TRY', 'CNY', 'NOK', 'NZD', 'ZAR', 'USD', 'MXN', 'ILS', 'GBP', 'KRW', 'MYR' ]
 
@@ -39,10 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         explanation: {
             margin: theme.spacing(2, 0)
-        },
-        formTitle: {
-            textAlign: 'center',
-            marginBottom: theme.spacing(4)
         }
     })
 )
@@ -86,7 +83,7 @@ const Form = () => {
     
     return (
         <form className={classes.root} onSubmit={e => handleSubmit(e)}>
-            <Typography className={classes.formTitle} variant="h6">Choose what you want to exchange:</Typography>
+            <Title>Choose what you want to exchange:</Title>
             { error.length ? <ErrorMessage>{ error }</ErrorMessage>: null }
             <div className={classes.inputs}>
                 <TextField

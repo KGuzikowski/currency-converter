@@ -3,10 +3,13 @@ import { currenciesActionTypes, currenciesStateType } from './currencies.types'
 export const INITIAL_STATE: currenciesStateType = {
     currencies: null,
     isFetching: false,
+    isFetchingHistory: false,
     errorMessage: '',
     usedCurrency: null,
     currenciesToCheck: [],
-    amount: null
+    amount: null,
+    history: null,
+    historyError: ''
 }
 
 const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateType => {
@@ -35,7 +38,29 @@ const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateT
                 usedCurrency: null,
                 currenciesToCheck: [],
                 currencies: null,
-                amount: null
+                amount: null,
+                history: null,
+            }
+        case currenciesActionTypes.FETCH_HISTORY_START:
+            return {
+                ...state,
+                isFetchingHistory: true,
+                historyError: '',
+            }
+        case currenciesActionTypes.FETCH_HISTORY_SUCCESS:
+            return {
+                ...state,
+                isFetchingHistory: false,
+                historyError: '',
+                history: action.payload
+            }
+        case currenciesActionTypes.FETCH_HISTORY_FAILURE:
+            return {
+                ...state,
+                isFetchingHistory: false,
+                historyError: action.payload,
+                currencies: null,
+                history: null,
             }
         default: return state
     }

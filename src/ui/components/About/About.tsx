@@ -4,13 +4,12 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
     title: {
       flexGrow: 1,
       textAlign: 'center',
-      fontWeight: 'normal'
+      fontWeight: 'normal',
+      marginBottom: theme.spacing(5),
+      marginTop: theme.spacing(3)
     }
   })
 )

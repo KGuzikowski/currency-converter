@@ -16,20 +16,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-interface ErrorMessageProps {
+interface WarningMessageProps {
   children: string[]
 }
 
-const ErrorMessage = ({ children }: ErrorMessageProps) => {
+const WarningMessage = ({ children }: WarningMessageProps) => {
 const classes = useStyles()
 
   return (
     <Paper elevation={2} className={classes.root}>
       {
         children.length > 1
-        ? children.map((error, i) => (
+        ? children.map((warn, i) => (
             <Typography key={i}>
-              - {error}
+              - {warn}
             </Typography>
           ))
         : <Typography>
@@ -40,4 +40,4 @@ const classes = useStyles()
   )
 }
 
-export default ErrorMessage
+export default WarningMessage

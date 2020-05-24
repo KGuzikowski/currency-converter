@@ -25,7 +25,7 @@ const CurrencyListItem = ({ name, value }: CurrencyListItemProps) => {
     const text = `${value} ${name}`
     return (
         <div className={classes.root}>
-            <ChevronRight />
+            <ChevronRight color="secondary" />
             <span className={classes.text}>{ text }</span>
         </div>
     )
