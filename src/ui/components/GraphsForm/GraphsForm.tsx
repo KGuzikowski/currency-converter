@@ -11,11 +11,15 @@ const useStyles = makeStyles((theme: Theme) =>
     switch: {
         display: 'flex',
         alignItems: 'center',
+        [theme.breakpoints.down('sm')]: {
+            paddingBottom: theme.spacing(3)
+        }
     },
     graphs: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        flexWrap: 'wrap'
     },
     control: {
         marginLeft: theme.spacing(2)
@@ -23,7 +27,19 @@ const useStyles = makeStyles((theme: Theme) =>
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        width: 200,
+        width: 200
+    },
+    btn: {
+        [theme.breakpoints.down('xs')]: {
+            marginTop: theme.spacing(3)
+        }
+    },
+    dates: {
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+        }
     }
   })
 )
@@ -31,10 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
 interface GraphsFormProps {
     submit: (startDate: string | undefined, endDate: string | undefined) => void,
     toggleChecked: () => void,
-    allGraphs: boolean
+    allGraphs: boolean,
+    defaultStart: string | undefined,
+    defaultEnd: string | undefined
 }
 
-const GraphsForm = ({ submit, toggleChecked, allGraphs }: GraphsFormProps) => {
+const GraphsForm = ({ submit, toggleChecked, allGraphs, defaultStart, defaultEnd }: GraphsFormProps) => {
     const classes = useStyles()
     const startDateInput = React.createRef<HTMLInputElement>()
     const endDateInput = React.createRef<HTMLInputElement>()
@@ -43,6 +61,9 @@ const GraphsForm = ({ submit, toggleChecked, allGraphs }: GraphsFormProps) => {
         e.preventDefault()
         submit(startDateInput.current?.value, endDateInput.current?.value)
     }
+
+    const start = defaultStart ? defaultStart : ''
+    const end = defaultEnd ? defaultEnd : ''
 
     return (
         <form className={classes.graphs} noValidate onSubmit={(e) => handleSubmit(e)}>
@@ -57,7 +78,7 @@ const GraphsForm = ({ submit, toggleChecked, allGraphs }: GraphsFormProps) => {
                     label={ allGraphs ? 'Yes' : 'No' }
                 />
             </div>
-            <div>
+            <div className={classes.dates}>
                 <TextField
                     id="date"
                     label="Start date"
@@ -68,6 +89,7 @@ const GraphsForm = ({ submit, toggleChecked, allGraphs }: GraphsFormProps) => {
                     }}
                     required
                     inputRef={startDateInput}
+                    defaultValue={start}
                 />
                 <TextField
                     id="date"
@@ -79,9 +101,10 @@ const GraphsForm = ({ submit, toggleChecked, allGraphs }: GraphsFormProps) => {
                     }}
                     required
                     inputRef={endDateInput}
+                    defaultValue={end}
                 />
             </div>
-            <Button variant="contained" color="secondary" type="submit">Get charts</Button>
+            <Button variant="contained" color="secondary" type="submit" className={classes.btn}>Get charts</Button>
         </form>
     )
 }

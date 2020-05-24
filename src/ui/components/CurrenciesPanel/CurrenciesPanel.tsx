@@ -12,11 +12,17 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '48%',
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.spacing(3, 0)
+        margin: theme.spacing(3, 0),
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        }
     },
     money: {
         fontWeight: 'normal',
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            textAlign: 'center'
+        },
     },
     list: {
         display: 'flex',

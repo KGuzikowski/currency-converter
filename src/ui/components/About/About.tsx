@@ -9,7 +9,10 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       fontWeight: 'normal',
       marginBottom: theme.spacing(5),
-      marginTop: theme.spacing(3)
+      marginTop: theme.spacing(3),
+      [theme.breakpoints.down('xs')]: {
+        marginBottom: theme.spacing(0),
+    },
     }
   })
 )

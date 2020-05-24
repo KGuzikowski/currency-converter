@@ -22,24 +22,41 @@ const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             alignItems: 'stretch',
             margin: theme.spacing(3, 0),
+            [theme.breakpoints.down('sm')]: {
+                width: '100%',
+            }
         },
         inputs: {
             display: 'flex'
         },
         autocomplete: {
             boxSizing: 'border-box',
-            width: '80%'
+            width: '50%',
+            [theme.breakpoints.down('sm')]: {
+                width: '60%'
+            },
         },
         amount: {
             boxSizing: 'border-box',
-            width: '20%'
+            width: '50%',
+            [theme.breakpoints.down('sm')]: {
+                width: '40%'
+            },
         },
         btn: {
             marginTop: theme.spacing(3),
-            padding: theme.spacing(1.5)
+            padding: theme.spacing(1.5),
+            [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+                marginTop: theme.spacing(5)
+            }
         },
         explanation: {
-            margin: theme.spacing(2, 0)
+            margin: theme.spacing(2, 0),
+            [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+                padding: theme.spacing(2)
+            }
         }
     })
 )
@@ -97,7 +114,7 @@ const Form = () => {
                     value={usedCurrency}
                     className={classes.autocomplete}
                     options={currencies}
-                    renderInput={(params) => <TextField {...params} label="Choose your currency"/>}
+                    renderInput={(params) => <TextField {...params} label="Choose currency"/>}
                     onChange={(e: any, newValue: string | null) => {
                         setUsedCurrency(newValue)
                     }}

@@ -1,6 +1,7 @@
-import { currenciesActionTypes, fetchCurrenciesFailureType, fetchCurrenciesStartType, fetchCurrenciesSuccessType, currencyDataType, currenciesStateType, fetchHistoryFailureType, fetchHistoryStartType, fetchHistorySuccessType, rates } from './currencies.types'
+import { currenciesActionTypes, fetchCurrenciesFailureType, fetchCurrenciesStartType, fetchCurrenciesSuccessType, currencyDataType, currenciesStateType, fetchHistoryFailureType, fetchHistoryStartType, fetchHistorySuccessType, rates, historyType, switchAllGraphsTogetherType } from './currencies.types'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
+import prepareChartData from '../../utils/PrepareChartData'
 
 export type AppThunk<State, ReturnType = void> = ThunkAction<ReturnType, State, unknown, Action<string>>
 
@@ -49,12 +50,12 @@ export const fetchCurrenciesStartAsync = (usedCurrency: string, currenciesToChec
     }
 }
 
-export const fetchHistoryStart = (start: string, end: string): fetchHistoryStartType => ({
+export const fetchHistoryStart = (allGraphsTogether: boolean): fetchHistoryStartType => ({
     type: currenciesActionTypes.FETCH_HISTORY_START,
-    payload: { start, end }
+    payload: allGraphsTogether
 })
 
-export const fetchHistorySuccess = (data: rates): fetchHistorySuccessType => ({
+export const fetchHistorySuccess = (data: historyType): fetchHistorySuccessType => ({
     type: currenciesActionTypes.FETCH_HISTORY_SUCCESS,
     payload: data
 })
@@ -64,12 +65,12 @@ export const fetchHistoryFailure = (errorMessage: string): fetchHistoryFailureTy
     payload: errorMessage
 })
 
-export const fetchHistoryStartAsync = (start: string, end: string, usedCurrency: string, currenciesToCheck: string[]): ThunkAction<void, currenciesStateType, unknown, Action<string>> => {
+export const fetchHistoryStartAsync = (start: string, end: string, usedCurrency: string, currenciesToCheck: string[], allGraphsTogether: boolean): ThunkAction<void, currenciesStateType, unknown, Action<string>> => {
     return async dispatch => {
         try {
             if(!start || !end) throw Error
 
-            dispatch(fetchHistoryStart(start, end))
+            dispatch(fetchHistoryStart(allGraphsTogether))
             
             let url = `https://api.exchangeratesapi.io/history?start_at=${start}&end_at=${end}&base=${usedCurrency}&symbols=`
             currenciesToCheck.forEach(currency => {
@@ -79,7 +80,9 @@ export const fetchHistoryStartAsync = (start: string, end: string, usedCurrency:
             const data = await response.json()
 
             let ratesData: rates = {}
-            currenciesToCheck.forEach(curr => ratesData[curr] = {})
+            currenciesToCheck.forEach(curr => {
+                if(curr !== usedCurrency) ratesData[curr] = {}
+            })
 
             for(const date in data.rates) {
                 for(const curr in data.rates[date]) {
@@ -89,11 +92,17 @@ export const fetchHistoryStartAsync = (start: string, end: string, usedCurrency:
                 }
             }
 
-            console.log(ratesData)
-            
-            dispatch(fetchHistorySuccess(ratesData))
+            dispatch(fetchHistorySuccess({
+                start: data.start_at,
+                end: data.end_at,
+                rates: prepareChartData(ratesData),
+            }))
         } catch(e) {
             dispatch(fetchHistoryFailure('Sorry, cannot fetch data! Please try again.'))
         }
     }
 }
+
+export const switchAllGraphsTogether = (): switchAllGraphsTogetherType => ({
+    type: currenciesActionTypes.SWITCH_ALL_GRAPHS_TOGETHER,
+})

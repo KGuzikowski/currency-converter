@@ -9,7 +9,8 @@ export const INITIAL_STATE: currenciesStateType = {
     currenciesToCheck: [],
     amount: null,
     history: null,
-    historyError: ''
+    historyError: '',
+    allGraphsTogether: false
 }
 
 const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateType => {
@@ -28,7 +29,9 @@ const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateT
                 ...state,
                 isFetching: false,
                 errorMessage: '',
-                currencies: action.payload
+                currencies: action.payload,
+                history: null,
+                historyError: ''
             }
         case currenciesActionTypes.FETCH_CURRENCIES_FAILURE:
             return {
@@ -46,6 +49,7 @@ const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateT
                 ...state,
                 isFetchingHistory: true,
                 historyError: '',
+                allGraphsTogether: action.payload
             }
         case currenciesActionTypes.FETCH_HISTORY_SUCCESS:
             return {
@@ -61,6 +65,11 @@ const currenciesReducer = (state = INITIAL_STATE, action: any): currenciesStateT
                 historyError: action.payload,
                 currencies: null,
                 history: null,
+            }
+        case currenciesActionTypes.SWITCH_ALL_GRAPHS_TOGETHER:
+            return {
+                ...state,
+                allGraphsTogether: !state.allGraphsTogether
             }
         default: return state
     }

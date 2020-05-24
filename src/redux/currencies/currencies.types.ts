@@ -5,11 +5,23 @@ export const currenciesActionTypes = {
     FETCH_HISTORY_START: 'FETCH_HISTORY_START',
     FETCH_HISTORY_SUCCESS: 'FETCH_HISTORY_SUCCESS',
     FETCH_HISTORY_FAILURE: 'FETCH_HISTORY_FAILURE',
+    SWITCH_ALL_GRAPHS_TOGETHER: 'SWITCH_ALL_GRAPHS_TOGETHER',
 }
 
 export interface currencyDataType {
     name: string,
     value: number
+}
+
+export interface point {
+    x: string,
+    y: number
+}
+
+export interface rate {
+    id: string,
+    color: string,
+    data: point[]
 }
 
 export interface rates {
@@ -21,7 +33,7 @@ export interface rates {
 export type historyType = {
     start: string,
     end: string
-    rates: rates
+    rates: rate[]
 } | null
 
 export interface currenciesStateType {
@@ -33,7 +45,8 @@ export interface currenciesStateType {
     amount: null | number,
     history: historyType
     historyError: string,
-    isFetchingHistory: boolean
+    isFetchingHistory: boolean,
+    allGraphsTogether: boolean
 }
 
 export interface fetchCurrenciesStartType {
@@ -57,18 +70,19 @@ export interface fetchCurrenciesFailureType {
 
 export interface fetchHistoryStartType {
     type: typeof currenciesActionTypes.FETCH_HISTORY_START,
-    payload: {
-        start: string,
-        end: string
-    }
+    payload: boolean
 }
 
 export interface fetchHistorySuccessType {
     type: typeof currenciesActionTypes.FETCH_HISTORY_SUCCESS,
-    payload: rates
+    payload: historyType
 }
 
 export interface fetchHistoryFailureType {
     type: typeof currenciesActionTypes.FETCH_HISTORY_FAILURE,
     payload: string
+}
+
+export interface switchAllGraphsTogetherType {
+    type: typeof currenciesActionTypes.SWITCH_ALL_GRAPHS_TOGETHER
 }

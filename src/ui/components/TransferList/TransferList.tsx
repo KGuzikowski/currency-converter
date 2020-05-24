@@ -21,9 +21,30 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 300,
       overflow: 'auto',
     },
+    container: {
+      [theme.breakpoints.down('sm')]: {
+        justifyContent: 'space-evenly'
+      }
+    },
     button: {
       margin: theme.spacing(0.5, 0),
+      [theme.breakpoints.down('xs')]: {
+        margin: theme.spacing(0),
+        transform: 'rotate(90deg)',
+      }
     },
+    btnsContainer: {
+      [theme.breakpoints.down('xs')]: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-evenly'
+      }
+    },
+    btnsItem: {
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+      }
+    }
   }),
 )
 
@@ -107,12 +128,12 @@ const TransferList = ({ startRight, startLeft, setToCheck }: TransferListProps) 
   )
 
   return (
-    <Grid container spacing={2} alignItems="center" justify="space-between">
+    <Grid container spacing={2} alignItems="center" justify="space-between" className={classes.container}>
       <Grid item>{customList(left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
+      <Grid item className={classes.btnsItem}>
+        <Grid container direction="column" alignItems="center" className={classes.btnsContainer}>
           <IconButton
-            size="medium"
+            size="small"
             className={classes.button}
             onClick={handleAllRight}
             disabled={left.length === 0}
@@ -121,7 +142,7 @@ const TransferList = ({ startRight, startLeft, setToCheck }: TransferListProps) 
             <LastPage />
           </IconButton>
           <IconButton
-            size="medium"
+            size="small"
             className={classes.button}
             onClick={handleCheckedRight}
             disabled={leftChecked.length === 0}
@@ -130,7 +151,7 @@ const TransferList = ({ startRight, startLeft, setToCheck }: TransferListProps) 
             <KeyboardArrowRightIcon />
           </IconButton>
           <IconButton
-            size="medium"
+            size="small"
             className={classes.button}
             onClick={handleCheckedLeft}
             disabled={rightChecked.length === 0}
@@ -139,7 +160,7 @@ const TransferList = ({ startRight, startLeft, setToCheck }: TransferListProps) 
             <KeyboardArrowLeftIcon />
           </IconButton>
           <IconButton
-            size="medium"
+            size="small"
             className={classes.button}
             onClick={handleAllLeft}
             disabled={right.length === 0}

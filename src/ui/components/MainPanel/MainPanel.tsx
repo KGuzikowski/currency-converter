@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
     data: {
       display: 'flex',
       justifyContent: 'space-between',
+      [theme.breakpoints.down('md')]: {
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'column',
+      },
     },
     spinner: {
       width: '48%',
@@ -55,30 +60,26 @@ const MainPanel = () => {
           <Form />
           {
             currencyData.isFetching
-              ? <div className={classes.spinner}>
-                  <CircularProgress color="secondary" />
-                </div>
-              : <CurrenciesPanel shouldDisplayRightPanel={shouldDisplayRightPanel} />
+            ? <div className={classes.spinner}>
+                <CircularProgress color="secondary" />
+              </div>
+            : <CurrenciesPanel shouldDisplayRightPanel={shouldDisplayRightPanel} />
           }
         </div>
         {
           currencyData.isFetching || currencyData.isFetchingHistory
-            ? <div className={classes.spinner2}>
-                < CircularProgress color="secondary" />
-              </div>
-            : currencyData.historyError
-              ? <div className={classes.error}>
-                  <ErrorMessage>
-                    {[currencyData.historyError]}
-                  </ErrorMessage>
-                </div>
-              : shouldDisplayRightPanel
-                  ? <GraphsSection
-                      usedCurrency={currencyData.usedCurrency}
-                      currenciesToCheck={currencyData.currenciesToCheck}
-                      history={currencyData.history}
-                    />
-                  : null
+          ? <div className={classes.spinner2}>
+              < CircularProgress color="secondary" />
+            </div>
+          : shouldDisplayRightPanel
+            ? <GraphsSection
+                usedCurrency={currencyData.usedCurrency}
+                currenciesToCheck={currencyData.currenciesToCheck}
+                history={currencyData.history}
+                historyError={currencyData.historyError}
+                allGraphsTogether={currencyData.allGraphsTogether}
+              />
+            : null
         }
       </div>
     </>
