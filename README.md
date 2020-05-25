@@ -46,3 +46,10 @@ I recommend going through code and reading comments.
 
 ## Final thoughts
 App might not be the most beautifull in the world but I think it looks pretty good. It's responsive and it has nice color theme.
+
+## UPDATE:
+I noticed today that when you choose euro as a base currency, no data nad no error is displayed. The problem is simple, so is the solution. Fix could take 10 minutes but unfortunately I'm out of time.
+
+So let me just tell you what the issue is. The error is with API because API uses euro as a base currency by default. So when I change base currency from uro to euro there is some unexpected behaviour.
+
+How to fix? I just need to add a simple if statement when making url for api call.
