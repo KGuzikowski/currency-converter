@@ -1,5 +1,8 @@
 # Project made by *Karol Guzikowski* for recruitment purposes.
 
+live version of app:
+https://lets-convert.herokuapp.com/
+
 This project was bootstrapped with Create React App.
 
 ## Used technologies:
