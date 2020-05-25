@@ -47,6 +47,8 @@ I recommend going through code and reading comments.
 ## Final thoughts
 App might not be the most beautifull in the world but I think it looks pretty good. It's responsive and it has nice color theme.
 
+It's not prefect because I made that in less than a day.
+
 ## UPDATE:
 I noticed today that when you choose euro as a base currency, no data nad no error is displayed. The problem is simple, so is the solution. Fix could take 10 minutes but unfortunately I'm out of time.
 
